@@ -1,0 +1,23 @@
+.Header {
+    margin: 0;
+    padding: 1.25rem 2rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.Header__brand {
+    display: flex;
+}
+
+.Header__logo {
+    padding-right: 0.1rem;
+    width: 1.95rem;
+}
+
+.Header__title {
+    color: var(--heading-color);
+    font-family: var(--heading-font);
+    font-size: 1.75rem;
+    font-weight: 400;
+    text-transform: uppercase;
+}

@@ -19,13 +19,25 @@ const TodoDashboardPage = () => {
         {
             task: "Write blog about React", 
             isComplete: false, 
-            dateAdded: moment().subtract(1, 'days').valueOf(),
+            dateAdded: moment().subtract(2, 'days').valueOf(),
             id: uuidv4()
         },
         {
             task: "Clean oven", 
             isComplete: true, 
             dateAdded: moment().subtract(2, 'days').valueOf(),
+            id: uuidv4()
+        },
+        {
+            task: "Buy milk", 
+            isComplete: true, 
+            dateAdded: moment().subtract(3, 'days').valueOf(),
+            id: uuidv4()
+        },
+        {
+            task: "Write will", 
+            isComplete: true, 
+            dateAdded: moment().subtract(5, 'days').valueOf(),
             id: uuidv4()
         }
     ]

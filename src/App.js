@@ -1,12 +1,14 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
 import TodoDashboardPage from './components/TodoDashboardPage';
+import Header from './components/Header';
+
+import './App.css';
 
 function App() {
   return (
     <div className="App">
+      <Header />
       <TodoDashboardPage />
     </div>
   );

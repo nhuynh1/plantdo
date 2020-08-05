@@ -26,6 +26,17 @@ const todosReducer = (state, action) => {
             });
         case 'DELETE_TODO':
             return state.filter(todo => todo.id !== action.id);
+        case 'UPDATE_TODO':
+            return state.map(todo => {
+                if(todo.id === action.id){
+                    return {
+                        ...todo,
+                        task: action.task
+                    };
+                } else {
+                    return todo;
+                }
+            })
         default:
             return state;
     }

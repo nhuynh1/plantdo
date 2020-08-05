@@ -7,25 +7,45 @@ import TodoList from './TodoList';
 import '../styles/TodoByDate.css';
 
 const renderByDate = (todosByDate) => {
-    let jsx = [];
-    Object.entries(todosByDate).forEach(([date, todos]) => {
-        jsx.push((
-            <div className="TodoByDate" key={date}>
-                <p>{date}</p>
+    
+
+    return todosByDate.map((todos, index) => {
+        moment.updateLocale('en', {
+            calendar : {
+                lastDay : '[Yesterday]',
+                sameDay : '[Today]',
+                nextDay : '[Tomorrow]',
+                lastWeek : '[Last] dddd',
+                nextWeek : '[Next] dddd',
+                sameElse : 'L'
+            }
+        });
+        
+        return (
+            <div className="TodoByDate" key={`day-${index}`}>
+                <h2 className="TodoByDate__date">{index < 2 ? moment().subtract(index, 'days').calendar() : 
+                    moment().subtract(index, 'days').format('MMM D YYYY')}</h2>
                 <TodoList todos={todos} />
             </div>
-        ))
+        )
     })
-    return jsx;
 }
 
-const sortTodosByDate = (todos) => {
+
+const sortTodosByDate = (todos) => {    
+    const dateRangeArray = Array.from({length: 6}, (value, index) => []);
+
+    
+
+
+    const today = moment().startOf('day');
+
     return todos.reduce((byDate, todo) => {
-        const formattedDate = moment(todo.dateAdded).format('MMM D YYYY');
-        const dateArray = byDate[formattedDate] || [];
-        byDate[formattedDate] = [...dateArray, todo];
+        const dateAdded = moment(todo.dateAdded).startOf('day');
+        const diffDays = today.diff(dateAdded, 'days');
+        byDate[diffDays] = [...byDate[diffDays], todo];
         return byDate;
-    }, {});
+    }, dateRangeArray);
 }
 
 const TodoByDate = () => {

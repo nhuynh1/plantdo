@@ -1,6 +1,8 @@
 import React, { useContext, useState } from 'react';
 import TodosContext from '../contexts/todos-context';
 
+import '../styles/TodoForm.css';
+
 const TodoFrom = () => {
 
     const { todosDispatch } = useContext(TodosContext);
@@ -18,13 +20,18 @@ const TodoFrom = () => {
     }
 
     return (
-        <form onSubmit={handleOnSubmit}>
+        <form 
+            className="TodoForm"
+            onSubmit={handleOnSubmit}>
             <input
+                className="TodoForm__input-text"
                 type="text"
                 placeholder="task"
                 value={todo}
                 onChange={(e) => setTodo(e.target.value)} />
-            <button type="submit">
+            <button 
+                className="TodoForm__button"
+                type="submit">
                 Add
             </button>
         </form>

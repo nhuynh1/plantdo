@@ -1,10 +1,71 @@
 .TodoItem {
+    align-items: flex-start;
+    cursor: pointer;
+    justify-content: space-between;
     display: flex;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
 }
 
-.TodoItem-flower {
-    width: 100px;
+.TodoItem button{
+    opacity: 0;
+}
+
+.TodoItem:hover {
+    background-color: #C2EAFF;
+}
+
+.TodoItem:hover button{
+    opacity: 1;
+}
+
+.TodoItem__checkbox {
+    display: flex;
+    position: relative;
+}
+
+.TodoItem__checkbox input:focus + .TodoItem__label {
+outline: dashed 2px lightgrey;
+}
+
+.TodoItem__checkbox input:checked + .TodoItem__label::after,
+.TodoItem__label:hover::after {
+    background-color: var(--accent-color);
+    background-image: url(../svgs/done.svg);
+    background-size: 90%;
+    border-radius: 3px;
+}
+
+.TodoItem__label:hover::after {
+    background-color: transparent;
+    background-image: url(../svgs/done-alt.svg);
+}
+
+.TodoItem__label {
+    color: var(--main-font-color);
+    cursor: pointer;
+    display: block;
+    padding: 0 1rem 0 35px;
+}
+
+.TodoItem__label::after {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--accent-color);
+    margin-right: 0.8rem;
     position: absolute;
-    bottom: 0;
     left: 0;
+    top: 0;
+}
+
+.screen-reader-only {
+    position: absolute;
+    clip: rect(1px, 1px, 1px, 1px);
+    padding: 0;
+    border: 0;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
 }

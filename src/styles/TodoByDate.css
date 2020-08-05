@@ -1,10 +1,39 @@
 .TodoByDate-container {
+    /* display: flex; */
+    /* flex: 1; to stretch to bottom */
+    /* padding-top: 1.5rem; */
+    /* overflow-x: auto; */
     display: flex;
     flex: 1;
-    width: 100%;
+}
+
+@media (min-width: 900px) {
+    .TodoByDate-container {
+        display: flex;
+        flex: 1; /* to stretch to bottom */
+        padding-top: 1.5rem;
+        /* overflow-x: auto; */
+    }
 }
 
 .TodoByDate {
+    background: repeating-linear-gradient(
+        180deg,
+        transparent,
+        transparent 60%,
+        #E3DAC9 0,
+        #E3DAC9) 0 0/100%;
+    border-right: 1px solid white;
     flex: 1;
     position: relative;
+}
+
+.TodoByDate__date {
+    color: var(--heading-color);
+    font-family: var(--heading-font);
+    font-size: 2.25rem;
+    font-weight: 400;
+    margin: 0 0 1.25rem 0;
+    text-align: center;
+    text-transform: uppercase;
 }
