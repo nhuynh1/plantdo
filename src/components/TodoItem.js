@@ -10,8 +10,6 @@ import '../styles/TodoItem.css';
 const TodoItem = ({ todo }) => {
 
     const [isComplete, setIsComplete] = useState(todo.isComplete);
-    const [isEditing, setIsEditing] = useState(false);
-    const [task, setTask] = useState(todo.task);
     const { todosDispatch } = useContext(TodosContext);
 
     const onToggleComplete = (id) => (e) => {
@@ -30,26 +28,11 @@ const TodoItem = ({ todo }) => {
         });
     }
 
-    const onSave = (id) => () => {
-        setIsEditing(false);
-        todosDispatch({
-            type: 'UPDATE_TODO',
-            id,
-            task
-        })
-    }
-
-    const onKey = (id) => (e) => {
-        if (e.charCode === 13) {
-            onSave(id)();
-        }
-    }
-
     return (
         <div className="TodoItem">
             <div className="TodoItem__checkbox">
                 <input
-                    className="screen-reader-only"
+                    className="screen-reader-only TodoItem__real-checkbox"
                     type="checkbox"
                     id={`item-${todo.id}`}
                     checked={todo.isComplete}
@@ -57,19 +40,10 @@ const TodoItem = ({ todo }) => {
                 <label
                     className="TodoItem__label"
                     htmlFor={`item-${todo.id}`}>
-                    {todo.task}
+                    <span className="TodoItem__custom-checkbox"></span>
+                    <span>{todo.task}</span>
                 </label>
             </div>
-            {/* {isEditing ? 
-                (<>
-                    <input 
-                        type="text" 
-                        value={task} 
-                        onChange={(e) => setTask(e.target.value)} 
-                        onKeyPress={onKey(todo.id)}/>
-                    <button onClick={onSave(todo.id)}>x</button>
-                </>) : 
-                <span onClick={() => setIsEditing(true)}>{task}</span>} */}
             <button
                 type="button"
                 onClick={onDelete(todo.id)}>

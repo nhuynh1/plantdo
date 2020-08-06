@@ -1,10 +1,12 @@
 import React, { useContext } from 'react';
 import moment from 'moment';
-import TodosContext from '../contexts/todos-context';
 
+import TodosContext from '../contexts/todos-context';
+import DaysLoadedContext from '../contexts/days-loaded-context';
 import TodoList from './TodoList';
 
 import '../styles/TodoByDate.css';
+
 
 const renderByDate = (todosByDate) => {
     
@@ -32,12 +34,8 @@ const renderByDate = (todosByDate) => {
 }
 
 
-const sortTodosByDate = (todos) => {    
-    const dateRangeArray = Array.from({length: 6}, (value, index) => []);
-
-    
-
-
+const sortTodosByDate = (todos, numDays) => {    
+    const dateRangeArray = Array.from({length: numDays}, () => []);
     const today = moment().startOf('day');
 
     return todos.reduce((byDate, todo) => {
@@ -50,7 +48,8 @@ const sortTodosByDate = (todos) => {
 
 const TodoByDate = () => {
     const { todos } = useContext(TodosContext);
-    const todosByDate = sortTodosByDate(todos);
+    const { loaded } = useContext(DaysLoadedContext);
+    const todosByDate = sortTodosByDate(todos, loaded);
     return (
         <div className="TodoByDate-container">
             {renderByDate(todosByDate)}

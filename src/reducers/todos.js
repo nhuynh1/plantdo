@@ -3,6 +3,16 @@ import { v4 as uuidv4 } from 'uuid';
 
 const todosReducer = (state, action) => {
     switch(action.type) {
+        case 'ADD_TODO_TEST':
+            return [
+                ...state, 
+                    { 
+                        task: action.todo, 
+                        isComplete: false, 
+                        dateAdded: action.dateAdded,
+                        id:  "abc123"
+                    }
+                ];
         case 'ADD_TODO':
             return [
                 ...state, 

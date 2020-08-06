@@ -1,19 +1,11 @@
 import React from 'react';
 
+import ScrollButtons from './ScrollButtons';
+
 import logo from '../svgs/cactus.svg';
 import '../styles/Header.css';
 
 const Header = () => {
-
-    // useRef: https://reactjs.org/docs/hooks-reference.html#useref
-    const scrollTo = () => {
-        window.scrollTo({
-            top: 0,
-            left: 2000,
-            behavior: 'smooth'
-        })
-    }
-
     return (
         <header className="Header">
             <div className="Header__brand">
@@ -21,11 +13,7 @@ const Header = () => {
                 <h1 className="Header__title">Plant-Do</h1>
             </div>
             <div>
-                <button
-                    style={{ position: "fixed", right: "0px" }}
-                    onClick={scrollTo}>
-                    right
-                </button>
+                <ScrollButtons />
             </div>
         </header>
     )

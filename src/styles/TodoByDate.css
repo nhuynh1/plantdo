@@ -17,15 +17,18 @@
 }
 
 .TodoByDate {
-    background: repeating-linear-gradient(
-        180deg,
-        transparent,
+    background: linear-gradient(
+        to bottom,
         transparent 60%,
-        #E3DAC9 0,
-        #E3DAC9) 0 0/100%;
+        #E3DAC9 60%
+        );
     border-right: 1px solid white;
     flex: 1;
     position: relative;
+}
+
+.TodoByDate:nth-child(3n) {
+    border-right: none;
 }
 
 .TodoByDate__date {
