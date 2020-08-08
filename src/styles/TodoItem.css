@@ -1,9 +1,8 @@
 .TodoItem {
-    align-items: flex-start;
+    align-items: center;
     cursor: pointer;
     justify-content: space-between;
     display: flex;
-    margin-bottom: 0.5rem;
     padding: 0.5rem;
 }
 
@@ -11,16 +10,52 @@
     background-color: #C2EAFF;
 }
 
-.TodoItem button{
+.TodoItem__button-group {
+    display: flex;
+    justify-content: flex-end;
+    /* flex: 1; */
+}
+
+.TodoItem__button {
+    border: none;
+    cursor: pointer;
+    height: 56px;
+    width: 56px;
+}
+
+.TodoItem__task-wrapper {
+    flex: 1;
+}
+
+.TodoItem__task {
+    display: block;
+    outline-color: var(--accent-color);
+    outline-offset: 5px;
+}
+
+.TodoItem__button--delete {
+    background: url(../svgs/delete.svg) no-repeat center;
+}
+
+.TodoItem__button--migrate {
+    background: url(../svgs/migrate.svg) no-repeat center;
+}
+
+.TodoItem .TodoItem__button--delete, 
+.TodoItem .TodoItem__button--migrate {
     opacity: 0;
 }
 
-.TodoItem:hover button{
+.TodoItem:hover .TodoItem__button--delete, 
+.TodoItem:hover .TodoItem__button--migrate,
+.TodoItem__button--delete:focus,
+.TodoItem__button--migrate:focus {
     opacity: 1;
 }
 
 .TodoItem__checkbox {
     display: flex;
+    flex: 1;
 }
 
 .TodoItem__label {

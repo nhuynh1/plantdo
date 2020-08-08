@@ -38,11 +38,12 @@ const sortTodosByDate = (todos, numDays) => {
     const dateRangeArray = Array.from({length: numDays}, () => []);
     const today = moment().startOf('day');
 
-    return todos.reduce((byDate, todo) => {
-        const dateAdded = moment(todo.dateAdded).startOf('day');
-        const diffDays = today.diff(dateAdded, 'days');
-        byDate[diffDays] = [...byDate[diffDays], todo];
-        return byDate;
+    return todos.sort((a, b) => a.dateActive < b.dateActive ? -1 : 1)
+                .reduce((byDate, todo) => {
+                    const dateActive = moment(todo.dateActive).startOf('day');
+                    const diffDays = today.diff(dateActive, 'days');
+                    byDate[diffDays] = [todo, ...byDate[diffDays]];
+                    return byDate;
     }, dateRangeArray);
 }
 

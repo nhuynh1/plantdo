@@ -18,12 +18,14 @@ function App() {
       task: "Pick up dry cleaning",
       isComplete: false,
       dateAdded: moment().valueOf(),
+      dateActive: moment().valueOf(),
       id: uuidv4()
     },
     {
       task: "Write blog about React",
-      isComplete: false,
+      isComplete: true,
       dateAdded: moment().subtract(2, 'days').valueOf(),
+      dateActive: moment().subtract(2, 'days').valueOf(),
       id: uuidv4()
     }
     // ,

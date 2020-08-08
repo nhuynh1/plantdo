@@ -51,13 +51,15 @@ const ScrollButtons = () => {
     return (
         <div>
             <button
-                style={{ position: "fixed", right: "70px" }}
+            type="button"
+                // style={{ position: "fixed", right: "70px" }}
                 onClick={handleScrollLeft}
                 disabled={maxShowing <= 3}>
                 left
             </button>
             <button
-                style={{ position: "fixed", right: "0px" }}
+            type="button"
+                // style={{ position: "fixed", right: "0px" }}
                 onClick={handleScrollRight}>
                 right
             </button>

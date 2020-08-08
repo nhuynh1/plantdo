@@ -9,8 +9,9 @@ const todosReducer = (state, action) => {
                     { 
                         task: action.todo, 
                         isComplete: false, 
-                        dateAdded: action.dateAdded,
-                        id:  "abc123"
+                        dateAdded: action.dateAdded.valueOf(),
+                        dateActive: action.dateAdded.valueOf(),
+                        id:  uuidv4()
                     }
                 ];
         case 'ADD_TODO':
@@ -20,6 +21,7 @@ const todosReducer = (state, action) => {
                         task: action.todo, 
                         isComplete: false, 
                         dateAdded: moment().valueOf(),
+                        dateActive: moment().valueOf(),
                         id:  uuidv4() 
                     }
                 ];
@@ -41,7 +43,7 @@ const todosReducer = (state, action) => {
                 if(todo.id === action.id){
                     return {
                         ...todo,
-                        task: action.task
+                        ...action.todo
                     };
                 } else {
                     return todo;
