@@ -11,7 +11,7 @@ const Plant = () => {
     const [position, setPosition] = useState({left: '0%', bottom: '0%'});
     
     useEffect(() => {
-        setPosition( {left: randomPosition(80), bottom: randomPosition(35)} );
+        setPosition( {left: randomPosition(80), bottom: randomPosition(17)} );
     },[]);
     
     return (

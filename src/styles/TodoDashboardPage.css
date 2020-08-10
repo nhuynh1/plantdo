@@ -1,0 +1,21 @@
+.TodoDashboardPage {
+    display: flex;
+    flex: 1;
+}
+
+.TodoDashboardPage__arrow-container {
+    align-items: center;
+    background: linear-gradient(
+        to bottom,
+        transparent 80%,
+        #E3DAC9 80%);
+    border-right: solid 1px white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.TodoDashboardPage__arrow-container--right {
+    border: none;
+    border-left: solid 1px white;
+}

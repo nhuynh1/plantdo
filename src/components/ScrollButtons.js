@@ -1,70 +1,59 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 
-import moment from 'moment';
-
-import TodosContext from '../contexts/todos-context';
 import DaysLoadedContext from '../contexts/days-loaded-context';
+import DaysViewContext from '../contexts/days-view-context';
 
-const ScrollButtons = () => {
-    const { todosDispatch } = useContext(TodosContext);
+import '../styles/ScrollButtons.css';
+
+const ScrollRight = () => {
     const { loaded, setLoaded } = useContext(DaysLoadedContext);
-    const [maxShowing, setMaxShowing] = useState(3);
-
-    const scrollTo = (panes = 1) => {
-        const viewportWidth = window.innerWidth;
-        const scrollOptions = {
-            top: 0,
-            left: viewportWidth * (panes - 1),
-            behavior: "smooth"
-        }
-        window.scrollTo(scrollOptions);
-    }
-
-    useEffect(() => {
-        scrollTo(maxShowing / 3);
-    }, [maxShowing]);
-
-    useEffect(() => {
-        console.log('dispatch');
-        todosDispatch({
-            type: 'ADD_TODO_TEST',
-            todo: 'blah blah blah',
-            dateAdded: moment().subtract(loaded - 1, 'days')
-        })
-    }, [loaded, todosDispatch]);
+    const { maxShowing, setMaxShowing } = useContext(DaysViewContext);
 
     const handleScrollRight = (e) => {
         e.preventDefault();
-        if (maxShowing === loaded) {
+        if (maxShowing.end === loaded) {
             setLoaded(loaded + 3);
-            setMaxShowing(maxShowing + 3);
+            setMaxShowing({ start: maxShowing.end, end: maxShowing.end + 3 });
         } else {
-            setMaxShowing(maxShowing + 3);
+            setMaxShowing({ start: maxShowing.end, end: maxShowing.end + 3 });
         }
     }
 
+    return (
+        <button
+            aria-label="Next 3 days"
+            className="ScrollButton ScrollButton--right"
+            type="button"
+            onClick={handleScrollRight}>
+        </button>
+    )
+}
+
+const ScrollLeft = () => {
+    const { maxShowing, setMaxShowing } = useContext(DaysViewContext);
     const handleScrollLeft = (e) => {
         e.preventDefault();
-        setMaxShowing(maxShowing - 3);   
-    }
+        setMaxShowing({ start: maxShowing.start - 3, end: maxShowing.start });
+    }    
+    
+    return (
+        <button
+        aria-label="Previous 3 days"
+            className="ScrollButton ScrollButton--left"
+            type="button"
+            onClick={handleScrollLeft}
+            disabled={maxShowing.start === 0}>
+        </button>
+    )
+}
 
+const ScrollButtons = () => {
     return (
         <div>
-            <button
-            type="button"
-                // style={{ position: "fixed", right: "70px" }}
-                onClick={handleScrollLeft}
-                disabled={maxShowing <= 3}>
-                left
-            </button>
-            <button
-            type="button"
-                // style={{ position: "fixed", right: "0px" }}
-                onClick={handleScrollRight}>
-                right
-            </button>
+            <ScrollLeft />
+            <ScrollRight />
         </div>
     )
 }
 
-export default ScrollButtons;
+export {ScrollLeft, ScrollRight, ScrollButtons as default};

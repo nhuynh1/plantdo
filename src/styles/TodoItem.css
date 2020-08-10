@@ -33,6 +33,13 @@
     outline-offset: 5px;
 }
 
+.TodoItem__edit-text-input {
+    display: block;
+    font-family: var(--main-font);
+    font-size: 1rem;
+    height: 56px;
+}
+
 .TodoItem__button--delete {
     background: url(../svgs/delete.svg) no-repeat center;
 }

@@ -14,14 +14,14 @@
 
 html {
   font-size: 16px;
-  overflow-y: hidden;
-  scrollbar-width: none;
+  /* overflow-y: hidden; */
+  /* scrollbar-width: none; */
 }
 
-html::-webkit-scrollbar {
+/* html::-webkit-scrollbar {
   width: 0px;
   background: #E3DAC9;
-}
+} */
 
 body {
   background-color: #D1EFFF;

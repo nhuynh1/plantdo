@@ -1,66 +1,56 @@
-import React, { useReducer, useState } from 'react';
-import moment from 'moment';
-import { v4 as uuidv4 } from 'uuid';
+import React, { useReducer, useState, useEffect } from 'react';
+import { Route, Switch, BrowserRouter as Router } from 'react-router-dom'
 
+import { setTodos as _setTodos } from './firebase/actions';
 
 import TodoDashboardPage from './components/TodoDashboardPage';
 import Header from './components/Header';
 
 import TodosContext from './contexts/todos-context';
 import DaysLoadedContext from './contexts/days-loaded-context';
+import DaysViewContext from './contexts/days-view-context';
 import todosReducer from './reducers/todos';
 
 import './App.css';
+import AboutPage from './components/AboutPage';
 
 function App() {
-  const initialTodosState = [
-    {
-      task: "Pick up dry cleaning",
-      isComplete: false,
-      dateAdded: moment().valueOf(),
-      dateActive: moment().valueOf(),
-      id: uuidv4()
-    },
-    {
-      task: "Write blog about React",
-      isComplete: true,
-      dateAdded: moment().subtract(2, 'days').valueOf(),
-      dateActive: moment().subtract(2, 'days').valueOf(),
-      id: uuidv4()
-    }
-    // ,
-    // {
-    //     task: "Clean oven", 
-    //     isComplete: true, 
-    //     dateAdded: moment().subtract(2, 'days').valueOf(),
-    //     id: uuidv4()
-    // },
-    // {
-    //     task: "Buy milk", 
-    //     isComplete: true, 
-    //     dateAdded: moment().subtract(3, 'days').valueOf(),
-    //     id: uuidv4()
-    // },
-    // {
-    //     task: "Write will", 
-    //     isComplete: true, 
-    //     dateAdded: moment().subtract(5, 'days').valueOf(),
-    //     id: uuidv4()
-    // }
-  ]
-
-  const [todos, todosDispatch] = useReducer(todosReducer, initialTodosState);
+  const [todos, todosDispatch] = useReducer(todosReducer, []);
   const [loaded, setLoaded] = useState(3);
+  const [maxShowing, setMaxShowing] = useState({ start: 0, end: 3 });
+
+  const setTodos = () => {
+    _setTodos().then(todos => {
+      todosDispatch({
+        type: 'SET_TODOS',
+        todos
+      })
+    })
+  }
+
+  useEffect(() => {
+    setTodos()
+  }, [])
 
   return (
     <div className="App">
-
-      <TodosContext.Provider value={{ todos, todosDispatch }}>
-        <DaysLoadedContext.Provider value={{ loaded, setLoaded }}>
-          <Header />
-          <TodoDashboardPage />
-        </DaysLoadedContext.Provider>
-      </TodosContext.Provider>
+      <Router>
+        <Switch>
+          <Route path="/" exact={true}>
+            <TodosContext.Provider value={{ todos, todosDispatch }}>
+              <DaysViewContext.Provider value={{ maxShowing, setMaxShowing }}>
+                <DaysLoadedContext.Provider value={{ loaded, setLoaded }}>
+                  <Header />
+                  <TodoDashboardPage />
+                </DaysLoadedContext.Provider>
+              </DaysViewContext.Provider>
+            </TodosContext.Provider>
+          </Route>
+          <Route path="/about">
+            <AboutPage />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }

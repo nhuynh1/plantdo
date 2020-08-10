@@ -1,29 +1,56 @@
-import React, { useContext, useState, useRef, useEffect } from 'react';
-
+import React, { useContext, useState, useRef, useEffect, useCallback } from 'react';
 import moment from 'moment';
+
 import TodosContext from '../contexts/todos-context';
+import { completeTodo, updateTodo } from '../firebase/actions';
 
 import DeleteButton from './DeleteButton';
+import MigrateButton from './MigrateButton';
 import Plant from './Plant';
 
 import '../styles/TodoItem.css';
-import MigrateButton from './MigrateButton';
 
 const TodoItem = ({ todo }) => {
-    
-    // States
-    const [isComplete, setIsComplete] = useState(todo.isComplete);
-    const [isEditing, setIsEditing] = useState(false);
-    const [task, setTask] = useState(todo.task);
-    
     // Context
     const { todosDispatch } = useContext(TodosContext);
 
+    // States
+    const [isEditing, setIsEditing] = useState(false);
+    const [task, setTask] = useState(todo.task);
+    
     // Refs
     const node = useRef();
     const taskRef = useRef(task);
 
+    const onSave = useCallback((task) => {
+        updateTodo(todo.id, task).then(() => {
+            todosDispatch({
+                type: 'UPDATE_TODO',
+                id: todo.id,
+                todo: {task}
+            });
+            setIsEditing(false);
+        })
+        
+        
+        
+    }, [todo.id, todosDispatch])
+
+    const handleEnterKey = (e) => {
+        if (e.keyCode === 9) {
+            e.preventDefault()
+        }
+        if (e.charCode === 13 || e.keyCode === 13) {
+            onSave(task);
+        }
+    }
+
     useEffect(() => {
+        const handleClickOutside = (e) => {
+            if (node.current.contains(e.target)) return;
+            onSave(taskRef.current);
+        }
+        
         if(isEditing){
             document.addEventListener('click', handleClickOutside);
             node.current.querySelector('input').focus();
@@ -35,44 +62,23 @@ const TodoItem = ({ todo }) => {
             document.removeEventListener('click', handleClickOutside);
             
         }
-    }, [isEditing]);
+    }, [isEditing, onSave]);
 
     const onToggleComplete = (id) => (e) => {
-        setIsComplete(e.target.checked);
-        todosDispatch({
-            type: 'COMPLETE_TODO',
-            isComplete: e.target.checked,
-            id
-        });
+        const isComplete = e.target.checked
+        completeTodo(id, isComplete).then(() => {
+            todosDispatch({
+                type: 'COMPLETE_TODO',
+                isComplete,
+                id
+            });
+        })
+
     }
 
     
 
-    const onSave = (task) => {
-        todosDispatch({
-            type: 'UPDATE_TODO',
-            id: todo.id,
-            todo: {task}
-        });
-        setIsEditing(false);
-    }
-
-    const handleEnterKey = (e) => {
-        if (e.keyCode === 9) {
-            e.preventDefault()
-        }
-        if (e.charCode === 13 || e.keyCode === 13) {
-            onSave(task);
-        }
-
-    }
-
-
-
-    const handleClickOutside = (e) => {
-        if (node.current.contains(e.target)) return;
-        onSave(taskRef.current);
-    }
+    
 
     return (
         <div className="TodoItem">
@@ -95,7 +101,7 @@ const TodoItem = ({ todo }) => {
                 {isEditing ? (
                     <>
                         <input
-                            className="testing-node"
+                            className="TodoItem__edit-text-input"
                             onChange={(e) => {
                                 taskRef.current = e.target.value;
                                 setTask(e.target.value)
@@ -103,11 +109,6 @@ const TodoItem = ({ todo }) => {
                             onKeyDown={handleEnterKey}
                             type="text"
                             value={task} />
-                        <button 
-                            className="screen-reader-only"
-                        type="button" onClick={() => onSave(task)}>
-                            save
-                        </button>
                     </>
                 ) : (
                         <span
@@ -129,7 +130,7 @@ const TodoItem = ({ todo }) => {
                 </div>
             )}
 
-            {isComplete && <Plant />}
+            {todo.isComplete && <Plant />}
         </div>
     )
 }

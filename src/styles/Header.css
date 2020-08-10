@@ -21,3 +21,13 @@
     font-weight: 400;
     text-transform: uppercase;
 }
+
+.Header__button {
+    background-color: transparent;
+    background-image: url(../svgs/info.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+    height: 3.5rem;
+    width: 3.5rem;
+}

@@ -1,13 +1,23 @@
 import React from 'react';
 
-import TodoForm from './TodoForm'
 import TodoByDate from './TodoByDate';
+import { ScrollLeft, ScrollRight } from './ScrollButtons';
+
+import '../styles/TodoDashboardPage.css'
 
 const TodoDashboardPage = () => {
     return (
         <>
-            <TodoForm />
-            <TodoByDate />
+            <div className="TodoDashboardPage">
+                <div 
+                    className="TodoDashboardPage__arrow-container">
+                    <ScrollLeft />
+                    today
+                </div>
+                <TodoByDate />
+                <div className="TodoDashboardPage__arrow-container TodoDashboardPage__arrow-container--right"><ScrollRight /></div>
+            </div>
+
         </>
     )
 }

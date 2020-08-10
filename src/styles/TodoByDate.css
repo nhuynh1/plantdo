@@ -9,19 +9,22 @@
 
 @media (min-width: 900px) {
     .TodoByDate-container {
+        background: linear-gradient(
+            to bottom,
+            transparent 80%,
+            #E3DAC9 80%);        
         display: flex;
         flex: 1; /* to stretch to bottom */
-        padding-top: 1.5rem;
-        /* overflow-x: auto; */
+        /* padding-top: 1.5rem; */
     }
 }
 
 .TodoByDate {
-    background: linear-gradient(
+    /* background: linear-gradient(
         to bottom,
         transparent 60%,
         #E3DAC9 60%
-        );
+        ); */
     border-right: 1px solid white;
     flex: 1;
     position: relative;

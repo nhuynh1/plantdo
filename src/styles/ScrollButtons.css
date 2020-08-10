@@ -1,0 +1,16 @@
+.ScrollButton {
+    background-color: transparent;
+    background-position: top center;
+    background-repeat: no-repeat;
+    border: none;
+    height: 56px;
+    width: 56px;
+}
+
+.ScrollButton--right {
+    background-image: url(../svgs/arrow_forward.svg);
+}
+
+.ScrollButton--left {
+    background-image: url(../svgs/arrow_back.svg);
+}

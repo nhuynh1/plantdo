@@ -1,30 +1,7 @@
-import moment from 'moment';
-import { v4 as uuidv4 } from 'uuid';
-
 const todosReducer = (state, action) => {
     switch(action.type) {
-        case 'ADD_TODO_TEST':
-            return [
-                ...state, 
-                    { 
-                        task: action.todo, 
-                        isComplete: false, 
-                        dateAdded: action.dateAdded.valueOf(),
-                        dateActive: action.dateAdded.valueOf(),
-                        id:  uuidv4()
-                    }
-                ];
         case 'ADD_TODO':
-            return [
-                ...state, 
-                    { 
-                        task: action.todo, 
-                        isComplete: false, 
-                        dateAdded: moment().valueOf(),
-                        dateActive: moment().valueOf(),
-                        id:  uuidv4() 
-                    }
-                ];
+            return [...state, action.todo];
         case 'COMPLETE_TODO':
             return state.map(todo => {
                 if(todo.id === action.id) {
@@ -38,6 +15,8 @@ const todosReducer = (state, action) => {
             });
         case 'DELETE_TODO':
             return state.filter(todo => todo.id !== action.id);
+        case 'SET_TODOS':
+            return action.todos;
         case 'UPDATE_TODO':
             return state.map(todo => {
                 if(todo.id === action.id){
