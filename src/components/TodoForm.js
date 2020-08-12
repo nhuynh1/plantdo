@@ -1,16 +1,14 @@
 import React, { useContext, useState } from 'react';
-import TodosContext from '../contexts/todos-context';
 import moment from 'moment';
-import database from '../firebase/firebase';
-
+import AppContext from '../contexts/app-context';
+import AuthContext from '../contexts/auth-context';
+import { createTodo } from '../firebase/actions';
 import '../styles/TodoForm.css';
 
 const TodoFrom = () => {
-
-    const { todosDispatch } = useContext(TodosContext);
-
+    const { todosDispatch } = useContext(AppContext);
+    const { user } = useContext(AuthContext);
     const [todo, setTodo] = useState('')
-
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
@@ -20,11 +18,10 @@ const TodoFrom = () => {
             dateAdded: moment().valueOf(),
             dateActive: moment().valueOf()
         }
-        database.ref('todos').push(todoData).then((ref) => {
+        createTodo(todoData, user).then((ref) => {
             todosDispatch({
                 type: 'ADD_TODO',
-                id: ref.key,
-                todo: {...todoData}
+                todo: {...todoData, id: ref.key}
             });
             setTodo('');
         })

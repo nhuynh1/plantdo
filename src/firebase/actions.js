@@ -1,8 +1,8 @@
 import database from './firebase';
 
-const setTodos = () => {
+const setTodos = (user) => {
     const todos = [];
-    return database.ref('todos')
+    return database.ref(`todos/${user}`)
         .once('value')
         .then(snapshot => {
             snapshot.forEach(todo => {
@@ -12,14 +12,27 @@ const setTodos = () => {
         })
 }
 
-const completeTodo = (id, isComplete) => {
-    return database.ref(`todos/${id}`)
+const createTodo = (todo, user) => {
+    return database.ref(`todos/${user}`).push(todo)
+}
+
+const completeTodo = (id, user, isComplete) => {
+    return database.ref(`todos/${user}/${id}`)
         .update({ isComplete })
 }
 
-const updateTodo = (id, task) => {
-    return database.ref(`todos/${id}`)
+const updateTodo = (id, user, task) => {
+    return database.ref(`todos/${user}/${id}`)
         .update({ task })
 }
 
-export { setTodos, completeTodo, updateTodo };
+const removeTodo = (id, user) => {
+    return database.ref(`todos/${user}/${id}`).remove()
+}
+
+const migrateTodo = (id, user, dateActive) => {
+    return database.ref(`todos/${user}/${id}`)
+        .update({ dateActive })
+}
+
+export { createTodo, completeTodo, migrateTodo, removeTodo, setTodos, updateTodo };

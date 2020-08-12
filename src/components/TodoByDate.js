@@ -1,8 +1,6 @@
 import React, { useContext } from 'react';
 import moment from 'moment';
-
-import TodosContext from '../contexts/todos-context';
-import DaysViewContext from '../contexts/days-view-context';
+import AppContext from '../contexts/app-context';
 import TodoList from './TodoList';
 
 import '../styles/TodoByDate.css';
@@ -40,7 +38,7 @@ const sortTodosByDate = (todos, startDay, numDays = 3) => {
 
     return todos.filter(todo => {
             return todo.dateActive <= startDate.endOf('day').valueOf()
-                && todo.dateActive > endDate.endOf('day').valueOf()
+                && todo.dateActive > endDate.endOf('day').valueOf();
         })
         .sort((a, b) => a.dateActive < b.dateActive ? -1 : 1)
         .reduce((byDate, todo) => {
@@ -52,8 +50,7 @@ const sortTodosByDate = (todos, startDay, numDays = 3) => {
 }
 
 const TodoByDate = () => {
-    const { todos } = useContext(TodosContext);
-    const { maxShowing } = useContext(DaysViewContext);
+    const { todos, maxShowing } = useContext(AppContext);
     const todosByDate = sortTodosByDate(todos, maxShowing.start);
     return (
         <div className="TodoByDate-container">

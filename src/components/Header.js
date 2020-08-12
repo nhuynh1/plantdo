@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
-
+import { firebase } from '../firebase/firebase';
+import AboutPage from './AboutPage';
 import logo from '../svgs/cactus.svg';
 import '../styles/Header.css';
 
@@ -11,6 +12,10 @@ const Header = () => {
 
     const closeModal = () => {
         setIsOpen(false);
+    }
+
+    const logout = () => {
+        firebase.auth().signOut();
     }
 
     return (
@@ -24,15 +29,21 @@ const Header = () => {
                     <button
                         aria-label="About Plant-Do"
                         className="Header__button"
+                        title="About Plant-Do"
                         type="button"
                         onClick={() => setIsOpen(!infoIsOpen)}>
+                    </button>
+                    <button
+                        onClick={logout}
+                        type="button">
+                        Logout
                     </button>
                 </div>
             </header>
             <Modal
                 isOpen={infoIsOpen}
                 onRequestClose={closeModal}>
-                <p>my modal</p>
+                <AboutPage />
                 <button
                     type="button"
                     onClick={closeModal}

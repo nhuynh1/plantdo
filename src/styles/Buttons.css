@@ -1,0 +1,29 @@
+.Button {
+    background-color: transparent;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    height: 3.5rem;
+    width: 3.5rem;
+}
+
+.Button--delete {
+    background: url(../svgs/delete.svg) no-repeat center;
+}
+
+.Button--left {
+    background-image: url(../svgs/arrow_back.svg);
+}
+
+.Button--migrate {
+    background: url(../svgs/migrate.svg) no-repeat center;
+}
+
+.Button--right {
+    background-image: url(../svgs/arrow_forward.svg);
+}
+
+.Button--today {
+    background-image: url(../svgs/today.svg);
+}

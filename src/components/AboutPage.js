@@ -1,6 +1,7 @@
 import React from 'react';
 
-const AboutPage = () => {
+const AboutPage = ({history}) => {
+    console.log(history.location.pathname)
     return (
         <p>AboutPage</p>
     )

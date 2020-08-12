@@ -1,29 +1,25 @@
 import React, { useContext, useState, useRef, useEffect, useCallback } from 'react';
 import moment from 'moment';
 
-import TodosContext from '../contexts/todos-context';
+import AppContext from '../contexts/app-context';
+import AuthContext from '../contexts/auth-context';
 import { completeTodo, updateTodo } from '../firebase/actions';
 
-import DeleteButton from './DeleteButton';
-import MigrateButton from './MigrateButton';
+import { Delete as DeleteButton, Migrate as MigrateButton } from './Buttons';
 import Plant from './Plant';
 
 import '../styles/TodoItem.css';
 
 const TodoItem = ({ todo }) => {
-    // Context
-    const { todosDispatch } = useContext(TodosContext);
-
-    // States
+    const { todosDispatch } = useContext(AppContext);
+    const { user } = useContext(AuthContext)
     const [isEditing, setIsEditing] = useState(false);
     const [task, setTask] = useState(todo.task);
-    
-    // Refs
     const node = useRef();
     const taskRef = useRef(task);
 
     const onSave = useCallback((task) => {
-        updateTodo(todo.id, task).then(() => {
+        updateTodo(todo.id, user, task).then(() => {
             todosDispatch({
                 type: 'UPDATE_TODO',
                 id: todo.id,
@@ -31,10 +27,7 @@ const TodoItem = ({ todo }) => {
             });
             setIsEditing(false);
         })
-        
-        
-        
-    }, [todo.id, todosDispatch])
+    }, [todo.id, todosDispatch, user])
 
     const handleEnterKey = (e) => {
         if (e.keyCode === 9) {
@@ -66,7 +59,7 @@ const TodoItem = ({ todo }) => {
 
     const onToggleComplete = (id) => (e) => {
         const isComplete = e.target.checked
-        completeTodo(id, isComplete).then(() => {
+        completeTodo(id, user, isComplete).then(() => {
             todosDispatch({
                 type: 'COMPLETE_TODO',
                 isComplete,
@@ -75,10 +68,6 @@ const TodoItem = ({ todo }) => {
         })
 
     }
-
-    
-
-    
 
     return (
         <div className="TodoItem">
