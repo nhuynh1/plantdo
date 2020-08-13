@@ -1,0 +1,32 @@
+.LoginPage {
+    align-items: center;
+    background: var(--sand-bottom);
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    position: relative;
+}
+
+.LoginPage__button {
+    background-color: var(--accent-color);
+    border: none;
+    border-bottom: solid 5px transparent;
+    border-radius: 3px;
+    color: white;
+    cursor: pointer;
+    font-family: var(--main-font);
+    font-size: 1.75rem;
+    font-weight: 600;
+    padding: 0.75rem;
+}
+
+.LoginPage__button:hover, 
+.LoginPage__button:focus {
+    border-bottom-color: #0072b3;
+}
+
+.LoginPage__plant {
+    cursor: pointer;
+    position: absolute;
+    width: 6.25%;
+}

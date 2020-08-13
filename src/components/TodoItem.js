@@ -31,9 +31,9 @@ const TodoItem = ({ todo }) => {
 
     const handleEnterKey = (e) => {
         if (e.keyCode === 9) {
-            e.preventDefault()
+            e.preventDefault();
         }
-        if (e.charCode === 13 || e.keyCode === 13) {
+        if (e.keyCode === 13) {
             onSave(task);
         }
     }
@@ -53,7 +53,6 @@ const TodoItem = ({ todo }) => {
         
         return () => {
             document.removeEventListener('click', handleClickOutside);
-            
         }
     }, [isEditing, onSave]);
 
@@ -90,6 +89,7 @@ const TodoItem = ({ todo }) => {
                 {isEditing ? (
                     <>
                         <input
+                            aria-label="task"
                             className="TodoItem__edit-text-input"
                             onChange={(e) => {
                                 taskRef.current = e.target.value;
@@ -101,6 +101,7 @@ const TodoItem = ({ todo }) => {
                     </>
                 ) : (
                         <span
+                            aria-label="Select to edit"
                             className="TodoItem__task"
                             id={`item-${todo.id}-task`}
                             onKeyDown={(e) => [13, 32].includes(e.keyCode) && setIsEditing(true) }

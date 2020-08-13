@@ -13,7 +13,7 @@ const AuthProvider = ({ children }) => {
             if (user) {
                 setUser(user.uid);
                 setLoadingAuth(false);
-                if (history.location.pathname === '/login') {
+                if (['/login', '/'].includes(history.location.pathname)) {
                     history.push('/dashboard');
                 }
             } else {

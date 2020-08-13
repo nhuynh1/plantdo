@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import moment from 'moment';
 import AppContext from '../contexts/app-context';
 import AuthContext from '../contexts/auth-context';
-import { migrateTodo, removeTodo } from '../firebase/actions';
+import { migrateTodo, removeTodo, login as _login } from '../firebase/actions';
 
 import '../styles/Buttons.css';
 
@@ -27,6 +27,20 @@ const Delete = ({ todo }) => {
             className="Button Button--delete"
             type="button"
             onClick={onDelete(todo.id)}>
+        </button>
+    )
+}
+
+const Login = () => {
+    const login = () => {
+        _login();
+    }
+    return (
+        <button
+            className="Button--login"
+            onClick={login}
+            type="button">
+            Login with Google
         </button>
     )
 }
@@ -70,16 +84,16 @@ const Today = () => {
 }
 
 const ScrollRight = () => {
-    const { maxShowing, setMaxShowing, loaded, setLoaded } = useContext(AppContext);
+    const { maxShowing, setMaxShowing } = useContext(AppContext);
 
     const handleScrollRight = (e) => {
         e.preventDefault();
-        if (maxShowing.end === loaded) {
-            setLoaded(loaded + 3);
-            setMaxShowing({ start: maxShowing.end, end: maxShowing.end + 3 });
-        } else {
-            setMaxShowing({ start: maxShowing.end, end: maxShowing.end + 3 });
-        }
+        // if (maxShowing.end === loaded) {
+        //     setLoaded(loaded + 3);
+        //     setMaxShowing({ start: maxShowing.end, end: maxShowing.end + 3 });
+        // } else {
+        setMaxShowing({ start: maxShowing.end, end: maxShowing.end + 3 });
+        // }
     }
 
     return (
@@ -97,11 +111,11 @@ const ScrollLeft = () => {
     const handleScrollLeft = (e) => {
         e.preventDefault();
         setMaxShowing({ start: maxShowing.start - 3, end: maxShowing.start });
-    }    
-    
+    }
+
     return (
         <button
-        aria-label="Previous 3 days"
+            aria-label="Previous 3 days"
             className="Button Button--left"
             type="button"
             onClick={handleScrollLeft}
@@ -110,4 +124,4 @@ const ScrollLeft = () => {
     )
 }
 
-export { Delete, Migrate, ScrollLeft, ScrollRight, Today };
+export { Delete, Migrate, ScrollLeft, ScrollRight, Today, Login };

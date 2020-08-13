@@ -27,3 +27,21 @@
 .Button--today {
     background-image: url(../svgs/today.svg);
 }
+
+.Button--login {
+    background-color: var(--accent-color);
+    border: none;
+    border-bottom: solid 5px transparent;
+    border-radius: 3px;
+    color: white;
+    cursor: pointer;
+    font-family: var(--main-font);
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding: 0.75rem;
+}
+
+.Button--login:hover, 
+.Button--login:focus {
+    border-bottom-color: #0072b3;
+}

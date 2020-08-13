@@ -10,6 +10,7 @@ import AboutPage from './components/AboutPage';
 import LoginPage from './components/LoginPage';
 import Header from './components/Header';
 import TodoDashboardPage from './components/TodoDashboardPage';
+import LandingPage from './components/LandingPage';
 import './App.css';
 
 const history = createBrowserHistory();
@@ -17,7 +18,7 @@ const history = createBrowserHistory();
 function App() {
 
     const [todos, todosDispatch] = useReducer(todosReducer, []);
-    const [loaded, setLoaded] = useState(3);
+    const [isLoading, setIsLoading] = useState(true);
     const [maxShowing, setMaxShowing] = useState({ start: 0, end: 3 });
     const { user, isAuthenticated } = useContext(AuthContext);
 
@@ -26,7 +27,8 @@ function App() {
             todosDispatch({
                 type: 'SET_TODOS',
                 todos
-            })
+            });
+            setIsLoading(false);
         })
     }
 
@@ -39,6 +41,7 @@ function App() {
     return (
         <div className="App">
             <Router history={history}>
+            <Header />
                 <Switch>
                     <PrivateRoute path="/dashboard" exact={true}>
                         <AppContext.Provider
@@ -47,15 +50,15 @@ function App() {
                                 todosDispatch,
                                 maxShowing,
                                 setMaxShowing,
-                                loaded,
-                                setLoaded
+                                isLoading,
+                                setIsLoading
                             }}>
-                            <Header />
                             <TodoDashboardPage />
                         </AppContext.Provider>
                     </PrivateRoute>
                     <Route path="/about" component={AboutPage} />
                     <Route path="/login" component={LoginPage} />
+                    <Route path="/" component={LandingPage} exact={true} />
                 </Switch>
             </Router>
         </div>

@@ -1,19 +1,25 @@
-import React from 'react';
-import { firebase, googleAuthProvider } from '../firebase/firebase';
+import React, { useEffect, useState } from 'react';
+import logo from '../svgs/cactus.svg';
+import {randomPosition} from '../helpers/helpers';
+import '../styles/LoginPage.css';
+import { Login as LoginButton } from './Buttons';
 
-const LoginPage = ({history}) => {
+const LoginPage = () => {
+    const [position, setPosition] = useState({});
 
-    const login = () => {
-        firebase.auth().signInWithPopup(googleAuthProvider)
-    }
+    useEffect(() => {    
+        setPosition(randomPosition(80,17));
+    }, [])
     
     return (
-        <div>
-            <button
-                onClick={login}
-                type="button">
-                Login
-            </button>
+        <div className="LoginPage">
+            <LoginButton />
+            <img 
+                alt="" 
+                className="LoginPage__plant"
+                onClick={() => setPosition(randomPosition(80,17))}
+                src={logo} 
+                style={position} />
         </div>
     )
 }

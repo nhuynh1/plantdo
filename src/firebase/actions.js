@@ -1,4 +1,4 @@
-import database from './firebase';
+import database, { firebase, googleAuthProvider } from '../firebase/firebase';
 
 const setTodos = (user) => {
     const todos = [];
@@ -18,12 +18,12 @@ const createTodo = (todo, user) => {
 
 const completeTodo = (id, user, isComplete) => {
     return database.ref(`todos/${user}/${id}`)
-        .update({ isComplete })
+        .update({ isComplete });
 }
 
 const updateTodo = (id, user, task) => {
     return database.ref(`todos/${user}/${id}`)
-        .update({ task })
+        .update({ task });
 }
 
 const removeTodo = (id, user) => {
@@ -32,7 +32,11 @@ const removeTodo = (id, user) => {
 
 const migrateTodo = (id, user, dateActive) => {
     return database.ref(`todos/${user}/${id}`)
-        .update({ dateActive })
+        .update({ dateActive });
 }
 
-export { createTodo, completeTodo, migrateTodo, removeTodo, setTodos, updateTodo };
+const login = () => {
+    return firebase.auth().signInWithPopup(googleAuthProvider);
+}
+
+export { createTodo, completeTodo, migrateTodo, removeTodo, setTodos, updateTodo, login };

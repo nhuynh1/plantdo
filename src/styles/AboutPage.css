@@ -1,0 +1,5 @@
+.AboutPage {
+    background-color: white;
+    color: var(--main-font-color);
+    flex: 1;
+}

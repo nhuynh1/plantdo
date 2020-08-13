@@ -5,10 +5,7 @@
 
 .TodoDashboardPage__arrow-container {
     align-items: center;
-    background: linear-gradient(
-        to bottom,
-        transparent 80%,
-        #E3DAC9 80%);
+    background: var(--sand-bottom);
     border-right: solid 1px white;
     display: flex;
     flex-direction: column;
