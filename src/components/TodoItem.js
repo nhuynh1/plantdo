@@ -19,15 +19,18 @@ const TodoItem = ({ todo }) => {
     const taskRef = useRef(task);
 
     const onSave = useCallback((task) => {
-        updateTodo(todo.id, user, task).then(() => {
-            todosDispatch({
-                type: 'UPDATE_TODO',
-                id: todo.id,
-                todo: { task }
-            });
-            setIsEditing(false);
-        })
-    }, [todo.id, todosDispatch, user])
+        // only update the database and dispatch if the task actually has changed
+        if (todo.task !== task) {
+            updateTodo(todo.id, user, task).then(() => {
+                todosDispatch({
+                    type: 'UPDATE_TODO',
+                    id: todo.id,
+                    todo: { task }
+                });
+            })
+        }
+        setIsEditing(false);
+    }, [todo, todosDispatch, user])
 
     const handleEnterKey = (e) => {
         if (e.keyCode === 9) {
