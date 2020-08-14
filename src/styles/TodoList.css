@@ -1,12 +1,11 @@
 .TodoList {
-    height: 100vh;
+    height: 60%;
     overflow-y: auto;
-    padding: 0 2rem;
+    padding: 0 1rem;
 }
 
 @media (min-width: 900px) {
     .TodoList {
-        height: 60%;
         overflow-y: auto;
         padding: 0 2rem;
         width: 100%;

@@ -6,25 +6,29 @@ import AppContext from '../contexts/app-context';
 import Loading from './Loading';
 
 const TodoDashboardPage = () => {
-    const { isLoading } = useContext(AppContext);
+    const { isLoading, numDays } = useContext(AppContext);
 
-    if(isLoading) {
+    if (isLoading) {
         return <Loading />
     }
 
     return (
         <>
             <div className="TodoDashboardPage">
-                <div 
-                    className="TodoDashboardPage__arrow-container">
-                    <ScrollLeft />
-                    <Today />
-                </div>
+                {numDays > 1 && (
+                    <div
+                        className="TodoDashboardPage__arrow-container">
+                        <ScrollLeft />
+                        <Today />
+                    </div>
+                )}
                 <TodoByDate />
-                <div 
-                    className="TodoDashboardPage__arrow-container TodoDashboardPage__arrow-container--right">
-                    <ScrollRight />
-                </div>
+                {numDays > 1 && (
+                    <div
+                        className="TodoDashboardPage__arrow-container TodoDashboardPage__arrow-container--right">
+                        <ScrollRight />
+                    </div>
+                )}
             </div>
 
         </>

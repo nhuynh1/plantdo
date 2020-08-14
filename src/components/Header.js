@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react';
 import Modal from 'react-modal';
-import { firebase } from '../firebase/firebase';
 import AuthContext from '../contexts/auth-context';
 import AboutPage from './AboutPage';
+import { Logout as LogoutButton } from './Buttons';
 import logo from '../svgs/cactus.svg';
 import '../styles/Header.css';
 
@@ -40,10 +40,6 @@ const Header = () => {
         setIsOpen(false);
     }
 
-    const logout = () => {
-        firebase.auth().signOut();
-    }
-
     return (
         <>
             <header className="Header">
@@ -59,12 +55,7 @@ const Header = () => {
                         type="button"
                         onClick={() => setIsOpen(!infoIsOpen)}>
                     </button>
-                    <button
-                        className="Header__button Header__button--link"
-                        onClick={logout}
-                        type="button">
-                        Logout
-                    </button>
+                    <LogoutButton />
                 </div>)}
             </header>
             <Modal

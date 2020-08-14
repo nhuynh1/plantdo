@@ -39,4 +39,8 @@ const login = () => {
     return firebase.auth().signInWithPopup(googleAuthProvider);
 }
 
-export { createTodo, completeTodo, migrateTodo, removeTodo, setTodos, updateTodo, login };
+const logout = () => {
+    return firebase.auth().signOut();
+}
+
+export { createTodo, completeTodo, migrateTodo, removeTodo, setTodos, updateTodo, login, logout };

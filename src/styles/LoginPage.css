@@ -2,6 +2,7 @@
     align-items: center;
     background: var(--sand-bottom);
     display: flex;
+    flex-direction: column;
     flex: 1;
     justify-content: center;
     position: relative;

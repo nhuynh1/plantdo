@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import AuthContext from '../contexts/auth-context'
+import Loading from '../components/Loading';
 import { Login as LoginButton } from './Buttons';
 
 import '../styles/LandingPage.css';
 
 const LandingPage = () => {
+    const { loadingAuth } = useContext(AuthContext);
+
+    if(loadingAuth) {
+        return <Loading />
+    }
+
     return (
         <div className="LandingPage">
             <div className="LandingPage__cta">

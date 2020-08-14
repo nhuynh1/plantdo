@@ -1,15 +1,16 @@
 .TodoByDate-container {
+    background: var(--sand-bottom);  
     display: flex;
-    flex: 1;
+    flex: 1; /* to stretch to bottom */
 }
 
-@media (min-width: 900px) {
+/* @media (min-width: 900px) {
     .TodoByDate-container {
         background: var(--sand-bottom);  
         display: flex;
-        flex: 1; /* to stretch to bottom */
+        flex: 1; 
     }
-}
+} */
 
 .TodoByDate {
     border-right: 1px solid white;
@@ -20,6 +21,20 @@
 .TodoByDate:nth-child(3n) {
     border-right: none;
 }
+
+.TodoByDate__header {
+    background-color: #E8F7FF;
+    display: flex;
+    justify-content: space-between;
+}
+
+@media (min-width: 900px) {
+    .TodoByDate__header {
+        background-color: transparent;
+        justify-content: center;
+    }
+}
+
 
 .TodoByDate__date {
     color: var(--heading-color);

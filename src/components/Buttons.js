@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import moment from 'moment';
 import AppContext from '../contexts/app-context';
 import AuthContext from '../contexts/auth-context';
-import { migrateTodo, removeTodo, login as _login } from '../firebase/actions';
+import { migrateTodo, removeTodo, login , logout } from '../firebase/actions';
 
 import '../styles/Buttons.css';
 
@@ -32,15 +32,26 @@ const Delete = ({ todo }) => {
 }
 
 const Login = () => {
-    const login = () => {
-        _login();
-    }
+    // const login = () => {
+    //     _login();
+    // }
     return (
         <button
             className="Button--login"
             onClick={login}
             type="button">
             Login with Google
+        </button>
+    )
+}
+
+const Logout = () => {
+    return (
+        <button
+            className="Header__button Header__button--link"
+            onClick={logout}
+            type="button">
+            Logout
         </button>
     )
 }
@@ -72,28 +83,23 @@ const Migrate = ({ todo }) => {
 }
 
 const Today = () => {
-    const { setMaxShowing } = useContext(AppContext);
+    const { setStartDay } = useContext(AppContext);
     return (
         <button
             aria-label="View Today"
             className="Button Button--today"
             type="button"
-            onClick={() => setMaxShowing({ start: 0, end: 3 })}
+            onClick={() => setStartDay(0)}
         ></button>
     )
 }
 
 const ScrollRight = () => {
-    const { maxShowing, setMaxShowing } = useContext(AppContext);
+    const { startDay, setStartDay, numDays } = useContext(AppContext);
 
     const handleScrollRight = (e) => {
         e.preventDefault();
-        // if (maxShowing.end === loaded) {
-        //     setLoaded(loaded + 3);
-        //     setMaxShowing({ start: maxShowing.end, end: maxShowing.end + 3 });
-        // } else {
-        setMaxShowing({ start: maxShowing.end, end: maxShowing.end + 3 });
-        // }
+        setStartDay(startDay + numDays);
     }
 
     return (
@@ -107,10 +113,10 @@ const ScrollRight = () => {
 }
 
 const ScrollLeft = () => {
-    const { maxShowing, setMaxShowing } = useContext(AppContext);
+    const { startDay, setStartDay, numDays } = useContext(AppContext);
     const handleScrollLeft = (e) => {
         e.preventDefault();
-        setMaxShowing({ start: maxShowing.start - 3, end: maxShowing.start });
+        setStartDay(startDay - numDays);
     }
 
     return (
@@ -119,9 +125,9 @@ const ScrollLeft = () => {
             className="Button Button--left"
             type="button"
             onClick={handleScrollLeft}
-            disabled={maxShowing.start === 0}>
+            disabled={startDay === 0}>
         </button>
     )
 }
 
-export { Delete, Migrate, ScrollLeft, ScrollRight, Today, Login };
+export { Delete, Migrate, ScrollLeft, ScrollRight, Today, Login, Logout };

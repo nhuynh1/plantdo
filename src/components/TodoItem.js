@@ -23,7 +23,7 @@ const TodoItem = ({ todo }) => {
             todosDispatch({
                 type: 'UPDATE_TODO',
                 id: todo.id,
-                todo: {task}
+                todo: { task }
             });
             setIsEditing(false);
         })
@@ -43,14 +43,14 @@ const TodoItem = ({ todo }) => {
             if (node.current.contains(e.target)) return;
             onSave(taskRef.current);
         }
-        
-        if(isEditing){
+
+        if (isEditing) {
             document.addEventListener('click', handleClickOutside);
             node.current.querySelector('input').focus();
         } else {
             document.removeEventListener('click', handleClickOutside);
         }
-        
+
         return () => {
             document.removeEventListener('click', handleClickOutside);
         }
@@ -69,59 +69,60 @@ const TodoItem = ({ todo }) => {
     }
 
     return (
-        <div className="TodoItem">
-            <div className="TodoItem__checkbox">
-                <input
-                    aria-labelledby={`item-${todo.id}-task`}
-                    className="screen-reader-only TodoItem__real-checkbox"
-                    type="checkbox"
-                    id={`item-${todo.id}`}
-                    checked={todo.isComplete}
-                    onChange={onToggleComplete(todo.id)} />
-                <label
-                    className="TodoItem__label"
-                    htmlFor={`item-${todo.id}`}>
-                    <span className="TodoItem__custom-checkbox"></span>
-                </label>
-                <div 
-                    className="TodoItem__task-wrapper"
-                    ref={node}>
-                {isEditing ? (
-                    <>
-                        <input
-                            aria-label="task"
-                            className="TodoItem__edit-text-input"
-                            onChange={(e) => {
-                                taskRef.current = e.target.value;
-                                setTask(e.target.value)
-                            }}
-                            onKeyDown={handleEnterKey}
-                            type="text"
-                            value={task} />
-                    </>
-                ) : (
-                        <span
-                            aria-label="Select to edit"
-                            className="TodoItem__task"
-                            id={`item-${todo.id}-task`}
-                            onKeyDown={(e) => [13, 32].includes(e.keyCode) && setIsEditing(true) }
-                            onClick={() => setIsEditing(true)}
-                            tabIndex="0">
-                            {todo.task}
-                        </span>
+        <>
+            <div className="TodoItem">
+                <div className="TodoItem__checkbox">
+                    <input
+                        aria-labelledby={`item-${todo.id}-task`}
+                        className="screen-reader-only TodoItem__real-checkbox"
+                        type="checkbox"
+                        id={`item-${todo.id}`}
+                        checked={todo.isComplete}
+                        onChange={onToggleComplete(todo.id)} />
+                    <label
+                        className="TodoItem__label"
+                        htmlFor={`item-${todo.id}`}>
+                        <span className="TodoItem__custom-checkbox"></span>
+                    </label>
+                    <div
+                        className="TodoItem__task-wrapper"
+                        ref={node}>
+                        {isEditing ? (
+                            <>
+                                <input
+                                    aria-label="task"
+                                    className="TodoItem__edit-text-input"
+                                    onChange={(e) => {
+                                        taskRef.current = e.target.value;
+                                        setTask(e.target.value)
+                                    }}
+                                    onKeyDown={handleEnterKey}
+                                    type="text"
+                                    value={task} />
+                            </>
+                        ) : (
+                                <span
+                                    aria-label="Select to edit"
+                                    className="TodoItem__task"
+                                    id={`item-${todo.id}-task`}
+                                    onKeyDown={(e) => [13, 32].includes(e.keyCode) && setIsEditing(true)}
+                                    onClick={() => setIsEditing(true)}
+                                    tabIndex="0">
+                                    {todo.task}
+                                </span>
+                            )}
+                    </div>
+                </div>
+                {!isEditing &&
+                    (<div className="TodoItem__button-group">
+                        <DeleteButton todo={todo} />
+                        {!moment(todo.dateActive).isSame(moment(), 'day') &&
+                            <MigrateButton todo={todo} />}
+                    </div>
                     )}
-                </div>
             </div>
-            {!isEditing &&
-                (<div className="TodoItem__button-group">
-                    <DeleteButton todo={todo} />
-                    {!moment(todo.dateActive).isSame(moment(), 'day') && 
-                        <MigrateButton todo={todo} />}
-                </div>
-            )}
-
             {todo.isComplete && <Plant />}
-        </div>
+        </>
     )
 }
 
