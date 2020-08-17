@@ -4,9 +4,10 @@
     justify-content: space-between;
     display: flex;
     padding: 0.5rem;
+    min-height: 3.5rem;
 }
 
-.TodoItem:hover {
+.TodoItem:hover, .TodoItem:active {
     background-color: #C2EAFF;
 }
 
@@ -32,8 +33,8 @@
     height: 56px;
 }
 
-.TodoItem .Button--delete, 
-.TodoItem .Button--migrate {
+.TodoItem .Button--delete,
+.TodoItem .Button--migrate{
     opacity: 0;
 }
 
@@ -42,6 +43,20 @@
 .Button--delete:focus,
 .Button--migrate:focus {
     opacity: 1;
+}
+
+/* Touch devices */
+@media(hover: none) {
+    .TodoItem .Button--delete,
+    .TodoItem .Button--migrate {
+        opacity: 1;
+    }
+
+    .TodoItem:hover .TodoItem__button-group,
+    .TodoItem .TodoItem__button-group{
+        display: none;
+        opacity: 0;
+    }
 }
 
 .TodoItem__checkbox {
@@ -79,7 +94,23 @@
     border-radius: 3px;
 }
 
+.TodoItem__real-checkbox:not(:checked) + .TodoItem__label .TodoItem__custom-checkbox {
+    background-color: white;
+    background-image: none;
+}
+
 .TodoItem__real-checkbox:focus + .TodoItem__label .TodoItem__custom-checkbox {
     outline: solid 2px var(--accent-color);
     outline-offset: 3px;
+}
+
+.TodoItem__options-group {
+    align-items: center;
+    position: absolute;
+    display: flex;
+    left: 100%;
+    top: 0px;
+    height: 100%;
+    width: 100%;
+    background: #00A3FF;
 }

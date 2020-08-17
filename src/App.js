@@ -13,7 +13,6 @@ import LandingPage from './components/LandingPage';
 import { setTodos as _setTodos } from './firebase/actions';
 import { numDaysByViewportWidth } from './helpers/helpers';
 import './App.css';
-import Playground from './components/Playground';
 
 
 const history = createBrowserHistory();
@@ -52,7 +51,6 @@ function App() {
                     </PrivateRoute>
                     <Route path="/about" component={AboutPage} />
                     <Route path="/login" component={LoginPage} />
-                    <Route path="/play" component={Playground} />
                     <Route path="/" component={LandingPage} exact={true} />
                 </Switch>
             </Router>
