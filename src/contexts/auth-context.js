@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import { firebase } from '../firebase/firebase';
-import { history } from '../App';
+import { history } from '../routers/AppRouter';
 
 const AuthContext = React.createContext();
 
@@ -11,7 +11,7 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
-                setUser(user.uid);
+                setUser(user);
                 setLoadingAuth(false);
                 if (['/login', '/'].includes(history.location.pathname)) {
                     history.push('/dashboard');
@@ -26,10 +26,10 @@ const AuthProvider = ({ children }) => {
     return (
         <AuthContext.Provider
             value={{
-                user,
-                setUser,
+                user: user ? user.uid : null,
                 isAuthenticated: user !== null,
-                loadingAuth
+                loadingAuth,
+                initial: user ? user.displayName.charAt(0) : ''
             }}>
             {children}
         </AuthContext.Provider>

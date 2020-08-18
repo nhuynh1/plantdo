@@ -45,6 +45,10 @@
     opacity: 1;
 }
 
+.TodoItem__options-group {
+    display: none;
+}
+
 /* Touch devices */
 @media(hover: none) {
     .TodoItem .Button--delete,
@@ -52,10 +56,22 @@
         opacity: 1;
     }
 
+    /* Hide hover over icons */
     .TodoItem:hover .TodoItem__button-group,
     .TodoItem .TodoItem__button-group{
         display: none;
         opacity: 0;
+    }
+
+    .TodoItem__options-group {
+        align-items: center;
+        position: absolute;
+        display: flex;
+        left: 100%;
+        top: 0px;
+        height: 100%;
+        width: 100%;
+        background: #00A3FF;
     }
 }
 
@@ -104,13 +120,3 @@
     outline-offset: 3px;
 }
 
-.TodoItem__options-group {
-    align-items: center;
-    position: absolute;
-    display: flex;
-    left: 100%;
-    top: 0px;
-    height: 100%;
-    width: 100%;
-    background: #00A3FF;
-}

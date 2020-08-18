@@ -6,6 +6,12 @@
     padding: 0 1rem;
 }
 
+@media (min-width: 900px) {
+    .TodoForm {
+        padding: 1rem;
+    }
+}
+
 .TodoForm__button {
     background-color: var(--accent-color);
     border: none;

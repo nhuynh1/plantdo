@@ -1,0 +1,10 @@
+.FourOhFour {
+    align-items: center;
+    background: url(../svgs/cactus.svg) no-repeat bottom 15% left 35%/8%,
+                url(../svgs/hippo.svg) no-repeat bottom 10% left 60%/25%,
+                var(--sand-bottom);
+    color: var(--main-font-color);
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}

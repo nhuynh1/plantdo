@@ -12,8 +12,9 @@ const TodoFrom = () => {
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
+        if(todo.trim() === '') return;
         const todoData = {
-            task: todo,
+            task: todo.trim(),
             isComplete: false, 
             dateAdded: moment().valueOf(),
             dateActive: moment().valueOf()

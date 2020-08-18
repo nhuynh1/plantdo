@@ -9,19 +9,19 @@
 }
 
 .Button--delete {
-    background: url(../svgs/delete.svg) no-repeat center;
+    /* background: url(../svgs/delete.svg) no-repeat center; */
 }
 
 .Button--left {
-    background-image: url(../svgs/arrow_back.svg);
+    /* background-image: url(../svgs/arrow_back.svg); */
 }
 
 .Button--migrate {
-    background: url(../svgs/migrate.svg) no-repeat center;
+    /* background: url(../svgs/migrate.svg) no-repeat center; */
 }
 
 .Button--right {
-    background-image: url(../svgs/arrow_forward.svg);
+    /* background-image: url(../svgs/arrow_forward.svg); */
 }
 
 .Button--today {
@@ -44,4 +44,17 @@
 .Button--login:hover, 
 .Button--login:focus {
     border-bottom-color: #0072b3;
+}
+
+.Button--logout {
+    color: #5A5A5A;
+    font-family: var(--main--font);
+    font-size: 1rem;
+    padding: 0 1rem;
+    text-align: left;
+    width: 100%;
+}
+
+.Button--logout:hover {
+    text-decoration: underline;
 }

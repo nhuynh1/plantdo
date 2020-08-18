@@ -2,11 +2,10 @@ import React, { useState, useContext } from 'react';
 import Modal from 'react-modal';
 import AuthContext from '../contexts/auth-context';
 import AboutPage from './AboutPage';
-import { Logout as LogoutButton } from './Buttons';
+import { User as UserButton } from './Buttons';
 import logo from '../svgs/cactus.svg';
 import '../styles/Header.css';
 
-Modal.setAppElement('#root');
 Modal.defaultStyles.overlay = {
     alignItems: 'center',
     backgroundColor: 'rgba(0,0,0, 0.3)',
@@ -55,10 +54,11 @@ const Header = () => {
                         type="button"
                         onClick={() => setIsOpen(!infoIsOpen)}>
                     </button>
-                    <LogoutButton />
+                    <UserButton />
                 </div>)}
             </header>
             <Modal
+                appElement={document.querySelector('#root')}
                 isOpen={infoIsOpen}
                 onRequestClose={closeModal}>
                 <button

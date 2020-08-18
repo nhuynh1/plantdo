@@ -171,15 +171,15 @@ const TodoItem = ({ todo }) => {
 
                     {(!isEditing) &&
                     (<div className="TodoItem__button-group">
-                        <DeleteButton todo={todo} />
+                        <DeleteButton todo={todo} color={'#666666'} />
                         {!moment(todo.dateActive).isSame(moment(), 'day') &&
-                            <MigrateButton todo={todo} />}
+                            <MigrateButton todo={todo} color={'#666666'} />}
                     </div>
                     )}
                     <div className="TodoItem__options-group">
-                        <DeleteButton todo={todo} />
+                        <DeleteButton todo={todo} color={'#FFFFFF'} />
                         {!moment(todo.dateActive).isSame(moment(), 'day') &&
-                            <MigrateButton todo={todo} />}
+                            <MigrateButton todo={todo} color={'#FFFFFF'} />}
                     </div>
                 </div>
 

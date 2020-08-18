@@ -18,7 +18,7 @@ const TodoDashboardPage = () => {
                 {numDays > 1 && (
                     <div
                         className="TodoDashboardPage__arrow-container">
-                        <ScrollLeft />
+                        <ScrollLeft color={'#77B255'} />
                         <Today />
                     </div>
                 )}
@@ -26,7 +26,7 @@ const TodoDashboardPage = () => {
                 {numDays > 1 && (
                     <div
                         className="TodoDashboardPage__arrow-container TodoDashboardPage__arrow-container--right">
-                        <ScrollRight />
+                        <ScrollRight color={'#77B255'} />
                     </div>
                 )}
             </div>

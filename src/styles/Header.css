@@ -45,14 +45,3 @@
 .Header__button--close {
     background-image: url(../svgs/close.svg);
 }
-
-.Header__button--link {
-    color: #5A5A5A;
-    font-family: var(--main--font);
-    font-size: 1rem;
-    width: auto;
-}
-
-.Header__button--link:hover {
-    text-decoration: underline;
-}

@@ -43,11 +43,11 @@ const TodoByDate = () => {
             {todosByDate.map(([date, todos]) => (
                 <div className="TodoByDate" key={date}>
                     <div className="TodoByDate__header">
-                        {numDays === 1 && (<ScrollLeft />)}
+                        {numDays === 1 && (<ScrollLeft color={'#77B255'} />)}
                         <h2 className="TodoByDate__date">
                             {moment(date).calendar()}
                         </h2>
-                        {numDays === 1 && (<ScrollRight />)}
+                        {numDays === 1 && (<ScrollRight color={'#77B255'} />)}
                     </div>
                     <TodoList todos={todos} hasForm={moment(date).isSame(moment(), 'day')} />
                 </div>
