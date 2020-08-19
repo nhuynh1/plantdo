@@ -8,7 +8,7 @@ import '../styles/LandingPage.css';
 const LandingPage = () => {
     const { loadingAuth } = useContext(AuthContext);
 
-    if(loadingAuth) {
+    if (loadingAuth) {
         return <Loading />
     }
 
@@ -17,10 +17,15 @@ const LandingPage = () => {
             <div className="LandingPage__cta">
                 <h1 className="LandingPage__cta-title">Task Management tool inspired by Bullet Journaling and cactuses</h1>
                 <LoginButton />
-                <img
+                <picture style={{width: '80%'}}>
+                    <source media="(min-width: 933px)" srcSet={process.env.PUBLIC_URL + '/plantdo.png'} />
+                    <source media="(min-width: 501px)" srcSet={process.env.PUBLIC_URL + '/plantdo-tablet.png'} />
+                    <img alt="" className="LandingPage__splash-image" src={process.env.PUBLIC_URL + '/plantdo-phone.png'} />
+                </picture>
+                {/* <img
                     alt="Screen capture of Plant-Do app"
                     className="LandingPage__splash-image"
-                    src={process.env.PUBLIC_URL + '/plantdo.png'} />
+                    src={process.env.PUBLIC_URL + '/plantdo.png'} /> */}
             </div>
             <div className="LandingPage__features">
                 <div className="LandingPage__content-container">
