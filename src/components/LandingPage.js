@@ -18,14 +18,10 @@ const LandingPage = () => {
                 <h1 className="LandingPage__cta-title">Task Management tool inspired by Bullet Journaling and cactuses</h1>
                 <LoginButton />
                 <picture style={{width: '80%'}}>
-                    <source media="(min-width: 933px)" srcSet={process.env.PUBLIC_URL + '/plantdo.png'} />
+                    <source media="(min-width: 900px)" srcSet={process.env.PUBLIC_URL + '/plantdo.png'} />
                     <source media="(min-width: 501px)" srcSet={process.env.PUBLIC_URL + '/plantdo-tablet.png'} />
                     <img alt="" className="LandingPage__splash-image" src={process.env.PUBLIC_URL + '/plantdo-phone.png'} />
                 </picture>
-                {/* <img
-                    alt="Screen capture of Plant-Do app"
-                    className="LandingPage__splash-image"
-                    src={process.env.PUBLIC_URL + '/plantdo.png'} /> */}
             </div>
             <div className="LandingPage__features">
                 <div className="LandingPage__content-container">
@@ -64,6 +60,7 @@ const LandingPage = () => {
                         <h3 className="LandingPage_team-title">Plant-Do is a Nancy Huynh project</h3>
                         <p className="LandingPage_team-description">Coding is the best way to learn to code and I wanted to learn front-end development with React</p>
                         <p className="LandingPage_team-description">If you need help with a project contact me: <a href="mailto:hire@nancyhuynh.com">hire@nancyhuynh.com</a></p>
+                        <p className="LandingPage_team-description">Feel free to <a href="https://nancyhuynh.com">check out my portfolio</a></p>
                     </div>
                     <img
                         alt=""

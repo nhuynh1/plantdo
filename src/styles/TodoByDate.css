@@ -4,21 +4,13 @@
     flex: 1; /* to stretch to bottom */
 }
 
-/* @media (min-width: 900px) {
-    .TodoByDate-container {
-        background: var(--sand-bottom);  
-        display: flex;
-        flex: 1; 
-    }
-} */
-
 .TodoByDate {
     border-right: 1px solid white;
     flex: 1;
     position: relative;
 }
 
-.TodoByDate:nth-child(3n) {
+.TodoByDate:last-child {
     border-right: none;
 }
 
