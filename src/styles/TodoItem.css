@@ -50,7 +50,7 @@
 }
 
 /* Touch devices */
-@media(hover: none) {
+@media (pointer: coarse) {
     .TodoItem .Button--delete,
     .TodoItem .Button--migrate {
         opacity: 1;
